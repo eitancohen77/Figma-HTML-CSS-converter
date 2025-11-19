@@ -1,0 +1,15 @@
+body {
+    background-color: black;
+}
+.frame {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    width: 393px;
+    height: 852px;
+
+    background-color: #FAFAFA;
+    
+    border-radius: 32px;
+}
