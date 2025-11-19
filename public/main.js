@@ -1,4 +1,5 @@
 import { gradient_linear } from "./utils/gradientLinear.js";
+import { solid } from "./utils/solid.js";
 
 if (frameMock.length == 0) {
     throw error("Figma file error")
@@ -13,9 +14,13 @@ for (const [key, value] of Object.entries(frameMock)) {
                 const gradientString = gradient_linear(j)
 
                 console.log(gradientString)
-                
+
                 const div120 = document.querySelector('.id1-120');
                 div120.style.backgroundImage = gradientString
+            }
+
+            if (j.type == "SOLID") {
+                var rgb = solid(j);
             }
         }
     }
