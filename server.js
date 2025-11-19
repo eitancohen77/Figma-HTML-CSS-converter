@@ -1,6 +1,6 @@
 const express = require('express');
-const mockData = require('./mockData.json');
-const frameMock = require('./frameTest.json')
+const realData = require('./realData.json');
+const mockData = require('./mockData.json')
 const path = require('path');
 require('dotenv').config();
 
@@ -13,12 +13,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 app.get('/', (req, res) => {
-    res.render ('index', { frameMock })
+    res.render ('index', { mockData })
 });
 
 // Testing Function
 function getMockData(url, token) {
-    return mockData;
+    return realData;
 }
 
 

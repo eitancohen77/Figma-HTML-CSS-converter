@@ -1,4 +1,4 @@
 node_modules/
 .env
-mockData.json
+realData.json
 notes

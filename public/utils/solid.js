@@ -1,5 +1,6 @@
 import { convertToRGB } from "./convertToRGB.js";
 
 export function solid(paint) {
-    return convertToRGB(paint.color)
-}
+    const { red, green, blue, a } = convertToRGB(paint.color)
+    return `rgba(${red}, ${green}, ${blue}, ${a})`;
+}   
