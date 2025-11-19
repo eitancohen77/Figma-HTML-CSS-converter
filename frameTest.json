@@ -110,13 +110,13 @@
     "primaryAxisAlignItems": "CENTER",
     "itemSpacing": 8,
     "layoutWrap": "NO_WRAP",
-    "absoluteBoundingBox": {
+    "absoluteBoundingBox": { 
         "x": 16,
         "y": 662,
         "width": 361,
         "height": 46
     },
-    "absoluteRenderBounds": {
+    "absoluteRenderBounds": { 
         "x": 16,
         "y": 662,
         "width": 361,

@@ -2,7 +2,7 @@ body {
     background-color: black;
 }
 .frame {
-    position: absolute;
+    position: relative;
     left: 0px;
     top: 0px;
 
@@ -12,14 +12,4 @@ body {
     background-color: #FAFAFA;
     
     border-radius: 32px;
-}
-
-.id1-120{
-    position: absolute;
-    left: 16px;
-    top: 662px;
-
-    width: 361px;
-    height: 46px;
-
 }
