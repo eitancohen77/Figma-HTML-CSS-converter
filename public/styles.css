@@ -13,3 +13,14 @@ body {
     
     border-radius: 32px;
 }
+
+.id1-120{
+    position: absolute;
+    left: 16px;
+    top: 662px;
+
+    width: 361px;
+    height: 46px;
+
+    background-color: red;
+}
