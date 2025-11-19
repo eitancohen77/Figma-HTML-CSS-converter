@@ -1,17 +1,21 @@
 const express = require('express');
-require('dotenv').config();
 const mockData = require('./mockData.json');
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
 const TOKEN_KEY = process.env.TOKEN_KEY;
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.get('/', (req, res) => {
-    res.send("Can you hear me?");
+    res.sendFile(path.join(__dirname, "public", "index.html"))
 });
 
 function getMockData(url, token) {
     return mockData;
 }
+
 
 app.get('/getFigma', async(req, res) => {
 
