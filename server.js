@@ -1,6 +1,6 @@
 const express = require('express');
 const mockData = require('./mockData.json');
-const frameMock = require('./notes/frameTest.json')
+const frameMock = require('./frameTest.json')
 const path = require('path');
 require('dotenv').config();
 
