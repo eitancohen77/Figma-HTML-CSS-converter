@@ -1,5 +1,6 @@
 const express = require('express');
 const mockData = require('./mockData.json');
+const frameMock = require('./notes/frameTest.json')
 const path = require('path');
 require('dotenv').config();
 
@@ -7,11 +8,15 @@ const app = express();
 const TOKEN_KEY = process.env.TOKEN_KEY;
 
 app.use(express.static(path.join(__dirname, "public")));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"))
+    res.render ('index', { frameMock })
 });
 
+// Testing Function
 function getMockData(url, token) {
     return mockData;
 }
