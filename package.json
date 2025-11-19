@@ -18,6 +18,7 @@
   "homepage": "https://github.com/eitancohen77/Figma-HTML-CSS-converter#readme",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.1.0"
   }
 }
