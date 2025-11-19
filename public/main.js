@@ -23,45 +23,78 @@ for (const item of children) {
     const stringId = convertIdString(id)
     console.log(stringId)
     const query = document.querySelector(stringId);
-    
-    for (const [key, value] of Object.entries(item)) {
-    
-        if (key == "fills") {
-            for (const [i, j] of Object.entries(value)) {
-                // Add graadient liunear to an object of some sorts
-                if (j.type == "GRADIENT_LINEAR") {
-                    const gradientString = gradient_linear(j)
-    
-                    console.log(gradientString)
-                    query.style.backgroundImage = gradientString
+
+    if (item.type == "FRAME") {
+        
+        for (const [key, value] of Object.entries(item)) {
+        
+            if (key == "fills") {
+                for (const [i, j] of Object.entries(value)) {
+                    // Add graadient liunear to an object of some sorts
+                    if (j.type == "GRADIENT_LINEAR") {
+                        const gradientString = gradient_linear(j)
+        
+                        console.log(gradientString)
+                        query.style.backgroundImage = gradientString
+                    }
+        
+                    if (j.type == "SOLID") {
+                        var rgb = solid(j);
+                        console.log(rgb)
+                        query.style.backgroundColor = rgb
+                    }
                 }
-    
-                if (j.type == "SOLID") {
-                    var rgb = solid(j);
-                    console.log(rgb)
-                    query.style.backgroundColor = rgb
+            } else if (key == "absoluteBoundingBox") {
+                // Come back to this to decide if you want to make it so query changes are done in main or in function
+                position(query, value)
+            } else if (key == "cornerRadius") {
+                query.style.borderRadius = value + 'px';
+            } else if (key == "clipsContent") {
+                if (value) {
+                    query.style.overflow = "hidden";
+                } else {
+                    query.style.overflow = "visible";
+                }
+            // Come back to strokes
+            } else if (key == "strokes") {
+                const stroke = value[0]
+                
+            //Come back to do more effects
+            } else if (key == "effects" && value.length > 0) {
+                if (value.type = "BACKGROUND_BLUR") {
+                    query.style.backdropFilter = `blur(${value.radius}px)` 
+                    console.log("went through")
                 }
             }
-        } else if (key == "absoluteBoundingBox") {
-            // Come back to this to decide if you want to make it so query changes are done in main or in function
-            position(query, value)
-        } else if (key == "cornerRadius") {
-            query.style.borderRadius = value + 'px';
-        } else if (key == "clipsContent") {
-            if (value) {
-                query.style.overflow = "hidden";
-            } else {
-                query.style.overflow = "visible";
-            }
-        // Come back to strokes
-        } else if (key == "strokes") {
-            const stroke = value[0]
-            
-        //Come back to do more effects
-        } else if (key == "effects" && value.length > 0) {
-            if (value.type = "BACKGROUND_BLUR") {
-                query.style.backdropFilter = `blur(${value.radius}px)` 
-                console.log("went through")
+        }
+    }
+
+    else if (item.type == "TEXT") {
+        console.log("Text is through")
+        for (const [key, value] of Object.entries(item)) { 
+            if (key == "style") {
+                query.style.fontFamily = item.style.fontFamily;
+                query.style.fontStyle = item.style.fontStyle;
+                query.style.fontWeight = item.style.fontWeight;
+                query.style.fontSize = item.style.fontSize + "px";
+                query.style.letterSpacing = item.style.letterSpacing + "px";
+                if (item.style.lineHeightUnit === "PIXELS") {
+                    query.style.lineHeight = item.style.lineHeightPx + "px";
+                }
+                query.style.textAlign = item.style.textAlignHorizontal.toLowerCase();
+                query.style.display = "flex";
+                if (item.style.textAlignVertical === "CENTER") {
+                    query.style.alignItems = "center";
+                } else if (item.style.textAlignVertical === "TOP") {
+                    query.style.alignItems = "flex-start";
+                } else {
+                    query.style.alignItems = "flex-end";
+}
+                query.style.justifyContent = query.style.alignItems;
+                query.style.marginBottom = item.style.paragraphSpacing + "px";
+                query.style.whiteSpace = "pre-wrap";
+            } else if (key == "characters") {
+                query.textContent = value
             }
         }
     }

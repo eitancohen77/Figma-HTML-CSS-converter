@@ -151,86 +151,7 @@
                         "id": "VariableID:2da7a0f91e62c9754e2fe9ea6c8dcbb220470c96/15:249"
                     }
                 },
-                "children": [
-                    {
-                        "id": "1:126",
-                        "name": "label-text",
-                        "type": "TEXT",
-                        "scrollBehavior": "SCROLLS",
-                        "boundVariables": {
-                            "lineHeight": [
-                                {
-                                    "type": "VARIABLE_ALIAS",
-                                    "id": "VariableID:2730299bfcce4856a764545999e241bd904ab87a/1163:718"
-                                }
-                            ]
-                        },
-                        "blendMode": "PASS_THROUGH",
-                        "fills": [
-                            {
-                                "blendMode": "NORMAL",
-                                "type": "SOLID",
-                                "color": {
-                                    "r": 0.210520938038826,
-                                    "g": 0.19832856953144073,
-                                    "b": 0.2546011209487915,
-                                    "a": 1
-                                }
-                            }
-                        ],
-                        "strokes": [],
-                        "strokeWeight": 0,
-                        "strokeAlign": "CENTER",
-                        "absoluteBoundingBox": {
-                            "x": 141.5,
-                            "y": 732,
-                            "width": 110,
-                            "height": 22
-                        },
-                        "absoluteRenderBounds": {
-                            "x": 142.5220489501953,
-                            "y": 736.9417724609375,
-                            "width": 108.28216552734375,
-                            "height": 11.22332763671875
-                        },
-                        "constraints": {
-                            "vertical": "TOP",
-                            "horizontal": "LEFT"
-                        },
-                        "layoutAlign": "INHERIT",
-                        "layoutGrow": 0,
-                        "layoutSizingHorizontal": "HUG",
-                        "layoutSizingVertical": "HUG",
-                        "characters": "Create account",
-                        "characterStyleOverrides": [],
-                        "styleOverrideTable": {},
-                        "lineTypes": [
-                            "NONE"
-                        ],
-                        "lineIndentations": [
-                            0
-                        ],
-                        "style": {
-                            "fontFamily": "Inter",
-                            "fontPostScriptName": "Inter-SemiBold",
-                            "fontStyle": "Semi Bold",
-                            "fontWeight": 600,
-                            "paragraphSpacing": 8,
-                            "textAutoResize": "WIDTH_AND_HEIGHT",
-                            "fontSize": 15,
-                            "textAlignHorizontal": "CENTER",
-                            "textAlignVertical": "CENTER",
-                            "letterSpacing": -0.15,
-                            "lineHeightPx": 22,
-                            "lineHeightPercent": 121.18936920166016,
-                            "lineHeightPercentFontSize": 146.6666717529297,
-                            "lineHeightUnit": "PIXELS"
-                        },
-                        "layoutVersion": 5,
-                        "effects": [],
-                        "interactions": []
-                    }
-                ],
+                "children": [],
                 "blendMode": "PASS_THROUGH",
                 "clipsContent": true,
                 "background": [
@@ -300,6 +221,84 @@
                         "radius": 10
                     }
                 ],
+                "interactions": []
+            }, 
+            {
+                "id": "1:126",
+                "name": "label-text",
+                "type": "TEXT",
+                "scrollBehavior": "SCROLLS",
+                "boundVariables": {
+                    "lineHeight": [
+                        {
+                            "type": "VARIABLE_ALIAS",
+                            "id": "VariableID:2730299bfcce4856a764545999e241bd904ab87a/1163:718"
+                        }
+                    ]
+                },
+                "blendMode": "PASS_THROUGH",
+                "fills": [
+                    {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                            "r": 0.210520938038826,
+                            "g": 0.19832856953144073,
+                            "b": 0.2546011209487915,
+                            "a": 1
+                        }
+                    }
+                ],
+                "strokes": [],
+                "strokeWeight": 0,
+                "strokeAlign": "CENTER",
+                "absoluteBoundingBox": {
+                    "x": 141.5,
+                    "y": 732,
+                    "width": 110,
+                    "height": 22
+                },
+                "absoluteRenderBounds": {
+                    "x": 142.5220489501953,
+                    "y": 736.9417724609375,
+                    "width": 108.28216552734375,
+                    "height": 11.22332763671875
+                },
+                "constraints": {
+                    "vertical": "TOP",
+                    "horizontal": "LEFT"
+                },
+                "layoutAlign": "INHERIT",
+                "layoutGrow": 0,
+                "layoutSizingHorizontal": "HUG",
+                "layoutSizingVertical": "HUG",
+                "characters": "Create account",
+                "characterStyleOverrides": [],
+                "styleOverrideTable": {},
+                "lineTypes": [
+                    "NONE"
+                ],
+                "lineIndentations": [
+                    0
+                ],
+                "style": {
+                    "fontFamily": "Inter",
+                    "fontPostScriptName": "Inter-SemiBold",
+                    "fontStyle": "Semi Bold",
+                    "fontWeight": 600,
+                    "paragraphSpacing": 8,
+                    "textAutoResize": "WIDTH_AND_HEIGHT",
+                    "fontSize": 15,
+                    "textAlignHorizontal": "CENTER",
+                    "textAlignVertical": "CENTER",
+                    "letterSpacing": -0.15,
+                    "lineHeightPx": 22,
+                    "lineHeightPercent": 121.18936920166016,
+                    "lineHeightPercentFontSize": 146.6666717529297,
+                    "lineHeightUnit": "PIXELS"
+                },
+                "layoutVersion": 5,
+                "effects": [],
                 "interactions": []
             }
         ]  
