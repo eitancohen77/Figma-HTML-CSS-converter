@@ -1,5 +1,6 @@
 const express = require('express');
-const realData = require('./realData.json');
+const realData= require('./realData.json');
+const realData2 = require('./realData2.json');
 const mockData = require('./mockData.json')
 const path = require('path');
 require('dotenv').config();
@@ -13,13 +14,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 app.get('/', (req, res) => {
-    res.render ('index', { realData })
+    res.render ('index', { realData})
 });
-
-// Testing Function
-function getMockData(url, token) {
-    return realData;
-}
 
 
 app.get('/getFigma', async(req, res) => {
