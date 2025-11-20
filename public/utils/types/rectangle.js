@@ -2,7 +2,8 @@ import { applyPosition } from "../helper/position.js";
 import { applyPaint } from "../helper/paint.js";
 
 
-export function rectangle(query, item, parentBox) {
+export function rectangle(query, item, parent) {
+    const parentBox = parent ? parent.absoluteBoundingBox : null;
     if (item.absoluteBoundingBox) {
         const localBox = parentBox
         ? {

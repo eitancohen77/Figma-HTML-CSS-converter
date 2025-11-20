@@ -1,53 +1,38 @@
 import { applyPosition } from "../helper/position.js";
-import { applyFills } from "../helper/fills.js";
 import { applyFont } from "../helper/font.js";
 import { applyPaint } from "../helper/paint.js";
 
-export function text(query, item, parentBox) {
-    
+export function text(query, item, parent) {
+    const parentBox =
+        parent && parent.absoluteBoundingBox ? parent.absoluteBoundingBox : null;
+    const parentIsAutoLayout =
+        parent && parent.layoutMode && parent.layoutMode !== "NONE";
+
     if (item.style) {
-        applyFont(query, item)
+        applyFont(query, item);
     }
-    
-    if (item.characters) {
-        query.textContent = item.characters
+
+    if (item.characters != null) {
+        query.textContent = item.characters;
     }
-    
-    if (item.absoluteBoundingBox) {
+
+    // Only absolutely position when parent is NOT auto layout
+    if (item.absoluteBoundingBox && !parentIsAutoLayout) {
+        const box = item.absoluteBoundingBox;
+
         const localBox = parentBox
             ? {
-                x: item.absoluteBoundingBox.x - parentBox.x,
-                y: item.absoluteBoundingBox.y - parentBox.y,
-                width: item.absoluteBoundingBox.width,
-                height: item.absoluteBoundingBox.height
-            }
-            : item.absoluteBoundingBox;
-        applyPosition(query, localBox)
-    }
-    
-    if (item.fills != null && item.fills.length > 0) {
-        applyPaint(query, item.fills[0], "text")
+                  x: box.x - parentBox.x,
+                  y: box.y - parentBox.y,
+                  width: box.width,
+                  height: box.height,
+              }
+            : box;
+
+        applyPosition(query, localBox);
     }
 
-
-    // for (const [key, value] of Object.entries(item)) { 
-    //     if (key == "style") {
-    //         applyFont(query, item)
-    //     } else if (key == "characters") {
-    //         query.textContent = value
-    //     } else if (key == "absoluteBoundingBox") {
-    //         const localBox = parentBox
-    //             ? {
-    //                 x: value.x - parentBox.x,
-    //                 y: value.y - parentBox.y,
-    //                 width: value.width,
-    //                 height: value.height
-    //             }
-    //             : value;
-    //         applyPosition(query, localBox)
-    //     } else if (key == "fills") {
-    //         applyFills(query, item.fills, "text")
-    //         //applyPaint(query, item.fills, )
-    //     }
-    // }
+    if (item.fills && item.fills.length > 0) {
+        applyPaint(query, item.fills[0], "text");
+    }
 }

@@ -36,46 +36,86 @@ function idToSelector(id) {
 }
 
 while (queue.length > 0) {
-
-    // Pop the queue.
     const { node: item, parent } = queue.shift();
-    const parentBox = parent != null ? parent.absoluteBoundingBox : null;
-
-    // Getting the id in order to tag each property/componenet types.
     const id = item.id;
-    const stringId = idToSelector(id)
-    console.log(stringId)
+    const stringId = idToSelector(id);
     const query = document.querySelector(stringId);
+    
+    if (!query) continue;
 
-    if (!query) {
-        console.warn('No element found for', stringId);
-        continue;
+    if (item.type === "FRAME") {
+        frame(query, item, parent);
     }
 
     if (item.type == "CANVAS") {
         canvas(query, item)
     }
 
-    if (item.type == "FRAME" || item.type == "GROUP") {
-        frame(query, parentBox, item);
-    }
-
     else if (item.type == "RECTANGLE") {
-        rectangle(query, item, parentBox)
+        rectangle(query, item, parent)
     }
 
     else if (item.type == "TEXT") {
-        text(query, item, parentBox)
+        text(query, item, parent)
     }
 
     // Deal with children
     const children = item.children || [];
     for (const child of children) {
-        const childDiv = document.createElement('div')
-        const childId =  idToClassName(child.id)
+        const childDiv = document.createElement("div");
+        const childId = idToClassName(child.id);
         childDiv.classList.add(childId);
+        query.appendChild(childDiv);
 
-        query.appendChild(childDiv)
         queue.push({ node: child, parent: item });
     }
+
+
+
+
+
+
+
+
+    // // Pop the queue.
+    // const { node: item, parent } = queue.shift();
+    // const parentBox = parent != null ? parent.absoluteBoundingBox : null;
+
+    // // Getting the id in order to tag each property/componenet types.
+    // const id = item.id;
+    // const stringId = idToSelector(id)
+    // console.log(stringId)
+    // const query = document.querySelector(stringId);
+
+    // if (!query) {
+    //     console.warn('No element found for', stringId);
+    //     continue;
+    // }
+
+    // if (item.type == "CANVAS") {
+    //     canvas(query, item)
+    // }
+
+    // if (item.type == "FRAME" || item.type == "GROUP") {
+    //     frame(query, parentBox, item);
+    // }
+
+    // else if (item.type == "RECTANGLE") {
+    //     rectangle(query, item, parentBox)
+    // }
+
+    // else if (item.type == "TEXT") {
+    //     text(query, item, parentBox)
+    // }
+
+    // // Deal with children
+    // const children = item.children || [];
+    // for (const child of children) {
+    //     const childDiv = document.createElement('div')
+    //     const childId =  idToClassName(child.id)
+    //     childDiv.classList.add(childId);
+
+    //     query.appendChild(childDiv)
+    //     queue.push({ node: child, parent: item });
+    // }
 }
