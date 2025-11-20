@@ -141,8 +141,41 @@ while (queue.length > 0) {
         //}
     }
 
-    if (item.type == "RECTANGLE") {
-
+    else if (item.type == "RECTANGLE") {
+        if (item.absoluteBoundingBox) {
+            const localBox = parentBox
+            ? {
+                x: item.absoluteBoundingBox.x - parentBox.x,
+                y: item.absoluteBoundingBox.y - parentBox.y,
+                width: item.absoluteBoundingBox.width,
+                height: item.absoluteBoundingBox.height
+            }
+            : item.absoluteBoundingBox;
+                position(query, localBox)
+        }
+        if (item.fills != null && item.fills.length > 0) {
+            for (const [i, j] of Object.entries(item.fills)) {
+                // Add graadient liunear to an object of some sorts
+                if (j.type == "GRADIENT_LINEAR") {
+                    const gradientString = gradient_linear(j)
+    
+                    query.style.backgroundImage = gradientString
+                }
+    
+                if (j.type == "SOLID") {
+                    var rgb = solid(j);
+                    query.style.backgroundColor = rgb
+                }
+            }
+            //fills(query, item.fills)
+        } 
+        if (item.cornerRadius != null) {
+            query.style.borderRadius = item.cornerRadius + 'px';
+        }
+        if (item.rotation != null && item.rotation !== 0) {
+            query.style.transform = `rotate(${item.rotation}rad)`;
+            query.style.transformOrigin = "center center";
+        }
     }
 
     else if (item.type == "TEXT") {
@@ -192,6 +225,7 @@ while (queue.length > 0) {
             }
         }
     }
+
 
     // Deal with children
     const children = item.children || [];
