@@ -4,6 +4,7 @@ import { applyFont } from "./helper/font.js";
 import { applyPaint } from "./helper/paint.js";
 
 export function text(query, item, parentBox) {
+    
     if (item.style) {
         applyFont(query, item)
     }
@@ -28,7 +29,7 @@ export function text(query, item, parentBox) {
         applyPaint(query, item.fills[0], "text")
     }
 
-    
+
     // for (const [key, value] of Object.entries(item)) { 
     //     if (key == "style") {
     //         applyFont(query, item)

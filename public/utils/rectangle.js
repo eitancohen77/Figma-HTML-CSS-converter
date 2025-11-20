@@ -3,6 +3,7 @@ import { applyFills } from "./helper/fills.js";
 
 
 export function rectangle(query, item, parentBox) {
+    
     if (item.absoluteBoundingBox) {
         const localBox = parentBox
         ? {

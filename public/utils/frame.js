@@ -4,6 +4,7 @@ import { applyFills } from "./helper/fills.js";
 import { applyPaint } from "./helper/paint.js";
 
 export function frame(query, parentBox, item) {
+    
     if (item.fills && item.fills.length > 0) {
         //applyFills(query, item.fills, "background");
         applyPaint(query, item.fills[0], "background")
