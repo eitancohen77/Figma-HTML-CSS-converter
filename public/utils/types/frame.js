@@ -1,7 +1,7 @@
-import { applyPosition } from "./helper/position.js";
-import { applyStrokes } from "./helper/strokes.js";
-import { applyFills } from "./helper/fills.js";
-import { applyPaint } from "./helper/paint.js";
+import { applyPosition } from "../helper/position.js";
+import { applyStrokes } from "../helper/strokes.js";
+import { applyFills } from "../helper/fills.js";
+import { applyPaint } from "../helper/paint.js";
 
 export function frame(query, parentBox, item) {
     

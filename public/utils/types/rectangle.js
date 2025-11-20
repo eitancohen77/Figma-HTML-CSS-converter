@@ -1,5 +1,5 @@
-import { applyPosition } from "./helper/position.js";
-import { applyFills } from "./helper/fills.js";
+import { applyPosition } from "../helper/position.js";
+import { applyFills } from "../helper/fills.js";
 
 
 export function rectangle(query, item, parentBox) {

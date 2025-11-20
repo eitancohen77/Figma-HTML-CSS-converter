@@ -1,7 +1,7 @@
-import { frame } from "./utils/frame.js";
-import { text } from "./utils/text.js";
-import { canvas } from "./utils/canvas.js";
-import { rectangle } from "./utils/rectangle.js";
+import { frame } from "./utils/types/frame.js";
+import { text } from "./utils/types/text.js";
+import { canvas } from "./utils/types/canvas.js";
+import { rectangle } from "./utils/types/rectangle.js";
 
 
 const data = window.realData;
@@ -11,7 +11,6 @@ if (!data || !data.document) {
     throw error("Figma file error")
 }
 
-// Original parent will have to be canvas, but in this case it will be set to .frame
 const parent = document.querySelector('body');
 
 // Need a queue to run BFS on the tree

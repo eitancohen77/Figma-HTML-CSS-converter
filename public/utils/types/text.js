@@ -1,7 +1,7 @@
-import { applyPosition } from "./helper/position.js";
-import { applyFills } from "./helper/fills.js";
-import { applyFont } from "./helper/font.js";
-import { applyPaint } from "./helper/paint.js";
+import { applyPosition } from "../helper/position.js";
+import { applyFills } from "../helper/fills.js";
+import { applyFont } from "../helper/font.js";
+import { applyPaint } from "../helper/paint.js";
 
 export function text(query, item, parentBox) {
     
