@@ -1,6 +1,5 @@
 const express = require('express');
 const realData= require('./realData.json');
-const mockData = require('./mockData.json')
 const path = require('path');
 require('dotenv').config();
 
@@ -11,14 +10,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-
 app.get('/', (req, res) => {
     res.render ('index', { realData})
 });
 
-
 app.get('/getFigma', async(req, res) => {
-
     // The actual method:
     // const url = "https://api.figma.com/v1/files/Hh3OjDglRPLNSzivcNWD0a";
     // try {
@@ -40,7 +36,6 @@ app.get('/getFigma', async(req, res) => {
     // }
 
     // Fake fetch method to perserve API usage.
-    res.send(getMockData(url, TOKEN_KEY))
 })
 
 app.listen(3000, ()=> {

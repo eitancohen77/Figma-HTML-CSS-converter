@@ -5,7 +5,6 @@ import { rectangle } from "./utils/rectangle.js";
 
 
 const data = window.realData;
-const children = data.document.children;
 console.log(data)
 
 if (!data || !data.document) {
@@ -57,8 +56,8 @@ while (queue.length > 0) {
         canvas(query, item)
     }
 
-    if (item.type == "FRAME") {
-            frame(query, parentBox, item);
+    if (item.type == "FRAME" || item.type == "GROUP") {
+        frame(query, parentBox, item);
     }
 
     else if (item.type == "RECTANGLE") {
@@ -68,7 +67,6 @@ while (queue.length > 0) {
     else if (item.type == "TEXT") {
         text(query, item, parentBox)
     }
-
 
     // Deal with children
     const children = item.children || [];
