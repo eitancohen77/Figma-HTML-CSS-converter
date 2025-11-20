@@ -94,7 +94,8 @@ while (queue.length > 0) {
                 }
                 //fills(query, item.fills)
                 
-            } else if (item.backgroundColor != null) {
+            } 
+            else if (item.backgroundColor != null) {
                 const { r, g, b, a } = item.backgroundColor;
                 const rgb = `rgba(${r*255}, ${g*255}, ${b*255}, ${a})`;
                 query.style.backgroundColor = rgb

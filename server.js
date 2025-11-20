@@ -25,7 +25,7 @@ function getMockData(url, token) {
 app.get('/getFigma', async(req, res) => {
 
     // The actual method:
-    // const url = "https://api.figma.com/v1/files/B6ssHR0eiZIIn2OZMiwiq2";
+    // const url = "https://api.figma.com/v1/files/Hh3OjDglRPLNSzivcNWD0a";
     // try {
     //     const response = await fetch(url, {
     //         headers: {
