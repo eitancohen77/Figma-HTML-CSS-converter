@@ -1,12 +1,32 @@
 ## Figma to HTML/CSS Converter
 This project converts Figma Designs into its corresponding HTML/CSS visually accurate counterpart. This is done by taking any given Figma design by using Figma's REST API, and using that data to translate to HTML/CSS.
 
+### The Figma Image:
+![alt text](images/image10.png)
+
+### The CSS/HTML Converter Image:
+![alt text](images/image11.png)
+
 ## Tech Stack
 * Node.js
 * Express.js
 * EJS
 * Javascript
 * Figma REST API
+
+### Supported Features
+The current types this project supports as writing this readme.file are:
+* CANVAS
+* FRAME
+* RECTANGLE
+* TEXT
+
+### Supported Properties:
+* Fills
+* Strokes
+* Positioning (absoluteBoundingBox)
+* Paint object
+* Gradient Linear
 
 ## Setup
 ### 1. Install Dependencies
