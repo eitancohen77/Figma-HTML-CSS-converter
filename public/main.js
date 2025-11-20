@@ -2,27 +2,54 @@ import { gradient_linear } from "./utils/gradientLinear.js";
 import { solid } from "./utils/solid.js";
 import { position } from "./utils/position.js";
 import { convertToRGB } from "./utils/convertToRGB.js";
-const mockData = window.mockData;
-const children = mockData.document.children;
-console.log(children)
 
-if (mockData.length == 0) {
+const data = window.realData;
+const children = data.document.children;
+console.log(data)
+
+if (data.length == 0) {
     throw error("Figma file error")
 }
 
-function convertIdString(id) {
+// Original parent will have to be canvas, but in this case it will be set to .frame
+const parent = document.querySelector('body');
+
+// Need a queue to run BFS on the tree
+// Need a way to keep track of which levels we are on in order 
+const queue = []
+
+// You are going to need to create a createCanvas function
+const rootDiv = document.createElement('div')
+const rootId =  idToClassName(data.document.id)
+rootDiv.classList.add(rootId);
+parent.append(rootDiv)
+
+queue.push(data.document);
+
+
+function idToClassName(id) {
     const [a, b] = id.split(':');
-    return `.id${a}-${b}`;
+    return `id${a}-${b}`;
+}
+
+function idToSelector(id) {
+    return '.' + idToClassName(id);  // with dot
 }
 
 
-for (const item of children) {
+while (queue.length > 0) {
+
+    const item = queue.shift()
 
     const id = item.id;
-    console.log(id)
-    const stringId = convertIdString(id)
+    const stringId = idToSelector(id)
     console.log(stringId)
     const query = document.querySelector(stringId);
+
+    if (!query) {
+        console.warn('No element found for', stringId);
+        continue;
+    }
 
     if (item.type == "FRAME") {
         
@@ -34,13 +61,11 @@ for (const item of children) {
                     if (j.type == "GRADIENT_LINEAR") {
                         const gradientString = gradient_linear(j)
         
-                        console.log(gradientString)
                         query.style.backgroundImage = gradientString
                     }
         
                     if (j.type == "SOLID") {
                         var rgb = solid(j);
-                        console.log(rgb)
                         query.style.backgroundColor = rgb
                     }
                 }
@@ -63,14 +88,12 @@ for (const item of children) {
             } else if (key == "effects" && value.length > 0) {
                 if (value.type = "BACKGROUND_BLUR") {
                     query.style.backdropFilter = `blur(${value.radius}px)` 
-                    console.log("went through")
                 }
             }
         }
     }
 
     else if (item.type == "TEXT") {
-        console.log("Text is through")
         for (const [key, value] of Object.entries(item)) { 
             if (key == "style") {
                 query.style.fontFamily = item.style.fontFamily;
@@ -95,8 +118,21 @@ for (const item of children) {
                 query.style.whiteSpace = "pre-wrap";
             } else if (key == "characters") {
                 query.textContent = value
+            } else if (key == "absoluteBoundingBox") {
+                position(query, value)
             }
         }
+    }
+
+    // Deal with children
+    const children = item.children || [];
+    for (const child of children) {
+        const childDiv = document.createElement('div')
+        const childId =  idToClassName(child.id)
+        childDiv.classList.add(childId);
+
+        query.appendChild(childDiv)
+        queue.push(child);
     }
 }
 
