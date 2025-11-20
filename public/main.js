@@ -7,7 +7,7 @@ const data = window.realData;
 const children = data.document.children;
 console.log(data)
 
-if (data.length == 0) {
+if (!data || !data.document) {
     throw error("Figma file error")
 }
 
@@ -19,12 +19,12 @@ const parent = document.querySelector('body');
 const queue = []
 
 // You are going to need to create a createCanvas function
-const rootDiv = document.createElement('div')
-const rootId =  idToClassName(data.document.id)
+const rootDiv = document.createElement('div');
+const rootId = idToClassName(data.document.id);
 rootDiv.classList.add(rootId);
-parent.append(rootDiv)
+parent.append(rootDiv);
 
-queue.push(data.document);
+queue.push({ node: data.document, parent: null });
 
 
 function idToClassName(id) {
@@ -39,7 +39,8 @@ function idToSelector(id) {
 
 while (queue.length > 0) {
 
-    const item = queue.shift()
+    const { node: item, parent } = queue.shift();
+    const parentBox = parent ? parent.absoluteBoundingBox : null;
 
     const id = item.id;
     const stringId = idToSelector(id)
@@ -70,8 +71,15 @@ while (queue.length > 0) {
                     }
                 }
             } else if (key == "absoluteBoundingBox") {
-                // Come back to this to decide if you want to make it so query changes are done in main or in function
-                position(query, value)
+                const localBox = parentBox
+                    ? {
+                        x: value.x - parentBox.x,
+                        y: value.y - parentBox.y,
+                        width: value.width,
+                        height: value.height
+                    }
+                    : value;
+                position(query, localBox)
             } else if (key == "cornerRadius") {
                 query.style.borderRadius = value + 'px';
             } else if (key == "clipsContent") {
@@ -119,7 +127,15 @@ while (queue.length > 0) {
             } else if (key == "characters") {
                 query.textContent = value
             } else if (key == "absoluteBoundingBox") {
-                position(query, value)
+                const localBox = parentBox
+                    ? {
+                        x: value.x - parentBox.x,
+                        y: value.y - parentBox.y,
+                        width: value.width,
+                        height: value.height
+                    }
+                    : value;
+                position(query, localBox)
             }
         }
     }
@@ -132,10 +148,6 @@ while (queue.length > 0) {
         childDiv.classList.add(childId);
 
         query.appendChild(childDiv)
-        queue.push(child);
+        queue.push({ node: child, parent: item });
     }
 }
-
-
-
-
