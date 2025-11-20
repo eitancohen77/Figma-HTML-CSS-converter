@@ -1,6 +1,7 @@
 import { gradient_linear } from "./utils/gradientLinear.js";
 import { solid } from "./utils/solid.js";
 import { position } from "./utils/position.js";
+import { strokes } from "./utils/strokes.js";
 import { convertToRGB } from "./utils/convertToRGB.js";
 
 const data = window.realData;
@@ -122,15 +123,21 @@ while (queue.length > 0) {
                     query.style.overflow = "visible";
                 }
             // Come back to strokes
-            } else if (item.strokes != null) {
-                const stroke = item.strokes[0]
+            }
+            if (item.strokes != null) {
+                strokes(query, item);
             }    
             //Come back to do more effects
-            if (item.effects && item.effects.length > 0) {
+            if (item.effects != null && item.effects.length > 0) {
                 if (item.effects.type = "BACKGROUND_BLUR") {
                     query.style.backdropFilter = `blur(${item.effects.radius}px)` 
                 }
             }
+            if (item.rectangleCornerRadii != null) {
+                const [tl, tr, br, bl] = item.rectangleCornerRadii;
+                query.style.borderRadius = `${tl}px ${tr}px ${br}px ${bl}px`;
+            }
+
         //}
     }
 
