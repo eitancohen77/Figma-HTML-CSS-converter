@@ -14,19 +14,6 @@ This project converts Figma Designs into its corresponding HTML/CSS visually acc
 * Javascript
 * Figma REST API
 
-### Supported Features
-The current types this project supports as writing this readme.file are:
-* CANVAS
-* FRAME
-* RECTANGLE
-* TEXT
-
-### Supported Properties:
-* Fills
-* Strokes
-* Positioning (absoluteBoundingBox)
-* Paint object
-* Gradient Linear
 
 ## Setup
 ### 1. Install Dependencies
@@ -42,7 +29,8 @@ In your terminal, run:
 
 `node server.js`
 
-This will run on localhost:3000
+This will run on localhost:3000. Over here you can see the output file.
+
 ## How it Works
 Keep in mind, my token has exceede its usage and I can't apply for new ones, so as regards to the server asking the user for the id, it's all done based on theory alone. I wasn't able to test. Because of this I also used fake mockData in order to mimic how an identical API call would send back data.
 ### Server
