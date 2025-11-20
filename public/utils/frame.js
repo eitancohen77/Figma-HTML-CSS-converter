@@ -4,7 +4,7 @@ import { applyFills } from "./helper/fills.js";
 import { applyPaint } from "./helper/paint.js";
 
 export function frame(query, parentBox, item) {
-    if (item.fills != null && item.fills.length > 0) {
+    if (item.fills && item.fills.length > 0) {
         //applyFills(query, item.fills, "background");
         applyPaint(query, item.fills[0], "background")
     } 
@@ -31,32 +31,31 @@ export function frame(query, parentBox, item) {
         applyPosition(query, localBox)
     }
 
-    if (item.cornerRadius != null) {
+    if (item.cornerRadius) {
         query.style.borderRadius = item.cornerRadius + 'px';
     }
 
-    if (item.clipsContent != null) {
+    if (item.clipsContent) {
         if (item.clipsContent) {
             query.style.overflow = "hidden";
         } else {
             query.style.overflow = "visible";
         }
-    // Come back to strokes
     }
 
-    if (item.strokes != null && item.strokes.length > 0) {
+    if (item.strokes && item.strokes.length > 0) {
         //applyStrokes(query, item);
         applyPaint(query, item.strokes[0], "stroke", item.strokeWeight)
     }    
 
     //Come back to do more effects
-    if (item.effects != null && item.effects.length > 0) {
+    if (item.effects && item.effects.length > 0) {
         if (item.effects.type = "BACKGROUND_BLUR") {
             query.style.backdropFilter = `blur(${item.effects.radius}px)` 
         }
     }
 
-    if (item.rectangleCornerRadii != null) {
+    if (item.rectangleCornerRadii) {
         const [tl, tr, br, bl] = item.rectangleCornerRadii;
         query.style.borderRadius = `${tl}px ${tr}px ${br}px ${bl}px`;
     }

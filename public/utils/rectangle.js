@@ -14,13 +14,13 @@ export function rectangle(query, item, parentBox) {
         : item.absoluteBoundingBox;
             applyPosition(query, localBox)
     }
-    if (item.fills != null && item.fills.length > 0) {
+    if (item.fills && item.fills.length > 0) {
         applyFills(query, item.fills, "background")
     } 
-    if (item.cornerRadius != null) {
+    if (item.cornerRadius) {
         query.style.borderRadius = item.cornerRadius + 'px';
     }
-    if (item.rotation != null && item.rotation !== 0) {
+    if (item.rotation && item.rotation !== 0) {
         query.style.transform = `rotate(${item.rotation}rad)`;
         query.style.transformOrigin = "center center";
     }
