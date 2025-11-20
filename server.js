@@ -10,32 +10,38 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req, res) => {
-    res.render ('index', { realData})
+app.get('/', async(req, res) => {
+    try {
+        // const resposne = await fetch('http://localhost:3000/getFigma');
+        // const realData = await response.json();
+
+        res.render ('index', { realData})
+    } catch(err) {
+        console.error(error.message);
+        res.status(500).send("Failed to load Figma data")
+    }
 });
 
 app.get('/getFigma', async(req, res) => {
-    // The actual method:
-    // const url = "https://api.figma.com/v1/files/Hh3OjDglRPLNSzivcNWD0a";
-    // try {
-    //     const response = await fetch(url, {
-    //         headers: {
-    //             'X-Figma-Token': TOKEN_KEY
-    //         }
-    //     })
+    //The actual method:
+    const url = "https://api.figma.com/v1/files/Hh3OjDglRPLNSzivcNWD0a";
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'X-Figma-Token': TOKEN_KEY
+            }
+        })
 
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! ${response.status}`)
-    //     }
+        if (!response.ok) {
+            throw new Error(`HTTP error! ${response.status}`)
+        }
 
-    //     const data = await response.json()
-    //     res.json(data);
-    // } catch(err) {
-    //     console.error(err.message);
-    //     res.status(500).json({ error: 'Failed to fetch Figma file' });
-    // }
-
-    // Fake fetch method to perserve API usage.
+        const data = await response.json()
+        res.json(data);
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Failed to fetch Figma file' });
+    }
 })
 
 app.listen(3000, ()=> {
