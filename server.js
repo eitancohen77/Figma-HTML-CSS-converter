@@ -6,25 +6,46 @@ require('dotenv').config();
 const app = express();
 const TOKEN_KEY = process.env.TOKEN_KEY;
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', async(req, res) => {
     try {
-        // const resposne = await fetch('http://localhost:3000/getFigma');
-        // const realData = await response.json();
+        //const resposne = await fetch('http://localhost:3000/getFigma');
+        //const realData = await resposne.json();
 
         res.render ('index', { realData})
     } catch(err) {
-        console.error(error.message);
+        console.error(err.message);
         res.status(500).send("Failed to load Figma data")
     }
 });
 
-app.get('/getFigma', async(req, res) => {
+app.get('/input', (req, res) => {
+    res.render('input')
+})
+
+app.post('/loadFigma', async (req, res) => {
+    const figmaId = req.body.figmaId;
+
+    try {
+        const response = await fetch(`http://localhost:3000/getFigma/${figmaId}`);
+        const figmaData = await response.json();
+
+        res.render('index', { realData: figmaData });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Failed to load Figma data");
+    }
+});
+
+
+app.get('/getFigma:id', async(req, res) => {
     //The actual method:
-    const url = "https://api.figma.com/v1/files/Hh3OjDglRPLNSzivcNWD0a";
+    const fileId = req.params.id;
+    const url = `https://api.figma.com/v1/files/${fileId}`;
     try {
         const response = await fetch(url, {
             headers: {
