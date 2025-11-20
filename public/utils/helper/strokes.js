@@ -1,4 +1,4 @@
-export function strokes(query, item) {
+export function applyStrokes(query, item) {
     if (item.strokes == null || item.strokes.length == 0 || item.strokeWeight == null) return;
 
     const stroke = item.strokes[0];

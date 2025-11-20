@@ -1,4 +1,4 @@
-export function position(query, value) {
+export function applyPosition(query, value) {
     query.style.position = "absolute";
     query.style.left = value.x + "px";
     query.style.top = value.y + "px";
