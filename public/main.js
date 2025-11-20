@@ -4,7 +4,7 @@ import { canvas } from "./utils/types/canvas.js";
 import { rectangle } from "./utils/types/rectangle.js";
 
 
-const data = window.realData;
+const data = window.mockData;
 console.log(data)
 
 if (!data || !data.document) {
@@ -39,8 +39,9 @@ while (queue.length > 0) {
 
     // Pop the queue.
     const { node: item, parent } = queue.shift();
-    const parentBox = parent ? parent.absoluteBoundingBox : null;
+    const parentBox = parent != null ? parent.absoluteBoundingBox : null;
 
+    // Getting the id in order to tag each property/componenet types.
     const id = item.id;
     const stringId = idToSelector(id)
     console.log(stringId)

@@ -1,9 +1,8 @@
 import { applyPosition } from "../helper/position.js";
-import { applyFills } from "../helper/fills.js";
+import { applyPaint } from "../helper/paint.js";
 
 
 export function rectangle(query, item, parentBox) {
-    
     if (item.absoluteBoundingBox) {
         const localBox = parentBox
         ? {
@@ -15,12 +14,15 @@ export function rectangle(query, item, parentBox) {
         : item.absoluteBoundingBox;
             applyPosition(query, localBox)
     }
+    
     if (item.fills && item.fills.length > 0) {
-        applyFills(query, item.fills, "background")
+        applyPaint(query, item.fills[0], "background")
     } 
+
     if (item.cornerRadius) {
         query.style.borderRadius = item.cornerRadius + 'px';
     }
+
     if (item.rotation && item.rotation !== 0) {
         query.style.transform = `rotate(${item.rotation}rad)`;
         query.style.transformOrigin = "center center";

@@ -1,5 +1,5 @@
 const express = require('express');
-const realData= require('./realData.json');
+const mockData= require('./mockData.json');
 const path = require('path');
 require('dotenv').config();
 
@@ -14,9 +14,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', async(req, res) => {
     try {
         //const resposne = await fetch('http://localhost:3000/getFigma');
-        //const realData = await resposne.json();
+        //const mockData = await resposne.json();
 
-        res.render ('index', { realData})
+        res.render ('index', { mockData})
     } catch(err) {
         console.error(err.message);
         res.status(500).send("Failed to load Figma data")
@@ -26,21 +26,6 @@ app.get('/', async(req, res) => {
 app.get('/input', (req, res) => {
     res.render('input')
 })
-
-app.post('/loadFigma', async (req, res) => {
-    const figmaId = req.body.figmaId;
-
-    try {
-        const response = await fetch(`http://localhost:3000/getFigma/${figmaId}`);
-        const figmaData = await response.json();
-
-        res.render('index', { realData: figmaData });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Failed to load Figma data");
-    }
-});
-
 
 app.get('/getFigma:id', async(req, res) => {
     //The actual method:
@@ -64,6 +49,20 @@ app.get('/getFigma:id', async(req, res) => {
         res.status(500).json({ error: 'Failed to fetch Figma file' });
     }
 })
+
+app.post('/loadFigma', async (req, res) => {
+    const figmaId = req.body.figmaId;
+
+    try {
+        const response = await fetch(`http://localhost:3000/getFigma/${figmaId}`);
+        const figmaData = await response.json();
+
+        res.render('index', { mockData: figmaData });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Failed to load Figma data");
+    }
+});
 
 app.listen(3000, ()=> {
     console.log('Server is runnning on http://localhost:3000');
