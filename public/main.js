@@ -36,6 +36,19 @@ function idToSelector(id) {
     return '.' + idToClassName(id);  // with dot
 }
 
+// function fills(query, item) {
+//     if (item.type == "GRADIENT_LINEAR") {
+//         const gradientString = gradient_linear(item)
+
+//         query.style.backgroundImage = gradientString
+//     }
+
+//     if (item.type == "SOLID") {
+//         var rgb = solid(item);
+//         query.style.backgroundColor = rgb
+//     }
+// }
+
 
 while (queue.length > 0) {
 
@@ -52,12 +65,21 @@ while (queue.length > 0) {
         continue;
     }
 
+    if (item.type == "CANVAS") {
+        if (item.backgroundColor) {
+            const { r, g, b, a } = item.backgroundColor;
+            query.style.backgroundColor = `rgba(${r*255}, ${g*255}, ${b*255}, ${a})`;
+        }
+        query.style.position = "relative"
+        query.style.width = "100vw"
+        query.style.height = "100vh"
+    }
+
     if (item.type == "FRAME") {
-        
-        for (const [key, value] of Object.entries(item)) {
-        
-            if (key == "fills") {
-                for (const [i, j] of Object.entries(value)) {
+        //for (const [key, value] of Object.entries(item)) {
+
+            if (item.fills != null && item.fills.length > 0) {
+                for (const [i, j] of Object.entries(item.fills)) {
                     // Add graadient liunear to an object of some sorts
                     if (j.type == "GRADIENT_LINEAR") {
                         const gradientString = gradient_linear(j)
@@ -70,35 +92,49 @@ while (queue.length > 0) {
                         query.style.backgroundColor = rgb
                     }
                 }
-            } else if (key == "absoluteBoundingBox") {
+                //fills(query, item.fills)
+                
+            } else if (item.backgroundColor != null) {
+                const { r, g, b, a } = item.backgroundColor;
+                const rgb = `rgba(${r*255}, ${g*255}, ${b*255}, ${a})`;
+                query.style.backgroundColor = rgb
+                console.log(rgb)
+            }
+            if (item.absoluteBoundingBox !== null) {
                 const localBox = parentBox
                     ? {
-                        x: value.x - parentBox.x,
-                        y: value.y - parentBox.y,
-                        width: value.width,
-                        height: value.height
+                        x: item.absoluteBoundingBox.x - parentBox.x,
+                        y: item.absoluteBoundingBox.y - parentBox.y,
+                        width: item.absoluteBoundingBox.width,
+                        height: item.absoluteBoundingBox.height
                     }
-                    : value;
+                    : item.absoluteBoundingBox;
                 position(query, localBox)
-            } else if (key == "cornerRadius") {
-                query.style.borderRadius = value + 'px';
-            } else if (key == "clipsContent") {
-                if (value) {
+            }
+            if (item.cornerRadius != null) {
+                query.style.borderRadius = item.cornerRadius + 'px';
+            }
+            if (item.clipsContent != null) {
+                if (item.clipsContent) {
                     query.style.overflow = "hidden";
                 } else {
                     query.style.overflow = "visible";
                 }
             // Come back to strokes
-            } else if (key == "strokes") {
-                const stroke = value[0]
-                
+            } else if (item.strokes != null) {
+                const stroke = item.strokes[0]
+            }    
             //Come back to do more effects
-            } else if (key == "effects" && value.length > 0) {
-                if (value.type = "BACKGROUND_BLUR") {
-                    query.style.backdropFilter = `blur(${value.radius}px)` 
+            if (item.effects && item.effects.length > 0) {
+                if (item.effects.type = "BACKGROUND_BLUR") {
+                    query.style.backdropFilter = `blur(${item.effects.radius}px)` 
                 }
             }
-        }
+        //}
+    }
+
+    if (item.type == "RECTANGLE") {
+
     }
 
     else if (item.type == "TEXT") {
@@ -136,6 +172,15 @@ while (queue.length > 0) {
                     }
                     : value;
                 position(query, localBox)
+            } else if (key == "fills") {
+                for (const [i, j] of Object.entries(item.fills)) {
+                    const { r, g, b, a } = j.color;
+                    const rgb = `rgba(${r*255}, ${g*255}, ${b*255}, ${a})`;
+                    query.style.color = rgb;
+                    if (j.opacity != null) {
+                        query.style.opacity = j.opacity
+                    }
+                }
             }
         }
     }
