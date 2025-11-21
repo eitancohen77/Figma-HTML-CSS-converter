@@ -110,3 +110,5 @@ Right now the project works only with absolute positioning. So if a figma file r
     "height": 760.0
 },`
 
+The way I fixed this was by adding a 4 way button that allows the user to move the image whichever way they want.
+
