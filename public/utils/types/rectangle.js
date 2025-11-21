@@ -27,4 +27,9 @@ export function rectangle(query, item, parentBox) {
         query.style.transform = `rotate(${item.rotation}rad)`;
         query.style.transformOrigin = "center center";
     }
+
+    if (item.rectangleCornerRadii) {
+        const [tl, tr, br, bl] = item.rectangleCornerRadii;
+        query.style.borderRadius = `${tl}px ${tr}px ${br}px ${bl}px`;
+    }
 }
