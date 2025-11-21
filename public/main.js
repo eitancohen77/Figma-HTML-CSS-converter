@@ -2,7 +2,8 @@ import { frame } from "./utils/types/frame.js";
 import { text } from "./utils/types/text.js";
 import { canvas } from "./utils/types/canvas.js";
 import { rectangle } from "./utils/types/rectangle.js";
-
+import { vector } from "./utils/types/vector.js";
+import { section } from "./utils/types/section.js";
 
 const data = window.mockData;
 
@@ -54,12 +55,14 @@ if (!data || !data.document) {
             canvas(query, item)
         } else if (item.type == "FRAME" || item.type == "GROUP") {
             frame(query, item, parent);
-        } else if (item.type == "VECTOR") {
+        } else if (item.type == "VECTOR" || item.type == "STAR" || item.type == "LINE") {
             vector(query, item, parent)
         } else if (item.type == "RECTANGLE") {
             rectangle(query, item, parent)
         } else if (item.type == "TEXT") {
             text(query, item, parent)
+        } else if (item.type == "SECTION") {
+            section(query, item, parent)
         }
 
         // Deal with children

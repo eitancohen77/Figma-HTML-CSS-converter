@@ -1,5 +1,3 @@
-import { applyPosition } from "../helper/position.js";
-import { applyPaint } from "../helper/paint.js";
 import { vector } from "./vector.js";
 
 export function rectangle(query, item, parent) {
