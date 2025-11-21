@@ -27,12 +27,15 @@ Create a .env file in the root of the project and add the variable with its toke
 ### 3. Run the Server
 In your terminal, run:
 
-### SideNote
-If you dont have a usable token set up, 
 
 `node server.js`
 
 This will run on localhost:3000. Over here you can see the output file.
+
+### SideNote
+If you dont have a usable token set up, or there was an error in the fetch command call, I created a GET call that uses mockdata taken from `mockData.json` file. This mockdata is taken from [this](https://www.figma.com/design/Hh3OjDglRPLNSzivcNWD0a/-Copy--Softlight-Engineering-Take-Home-Assignment?node-id=0-1&p=f&t=bNIRDsC7CsTHBhyb-0) figma design
+
+Go to  `localhost:3000/mockData` to see the results.
 
 ## How it Works
 

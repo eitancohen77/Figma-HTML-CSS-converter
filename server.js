@@ -1,5 +1,5 @@
 const express = require('express');
-//const mockData= require('./mockData.json');
+let mockData= require('./mockData.json');
 const path = require('path');
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', async(req, res) => {
     try {
         const resposne = await fetch('http://localhost:3000/getFigma');
-        const mockData = await resposne.json();
+        mockData = await resposne.json();
 
         res.render ('index', { mockData})
     } catch(err) {
@@ -22,6 +22,11 @@ app.get('/', async(req, res) => {
         res.status(500).send("Failed to load Figma data")
     }
 });
+
+app.get('/mockData', (req, res) => {
+    res.render ('index', { mockData})
+
+})
 
 app.get('/input', (req, res) => {
     res.render('input')
