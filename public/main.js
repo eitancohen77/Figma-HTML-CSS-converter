@@ -28,8 +28,7 @@ if (!data || !data.document) {
 
 
     function idToClassName(id) {
-        const [a, b] = id.split(':');
-        return `id${a}-${b}`;
+        return "id" + id.replace(/[^a-zA-Z0-9_-]/g, "-");
     }
 
     function idToSelector(id) {
