@@ -20,11 +20,6 @@ if (!data || !data.document) {
     const root = data.document
     const parent = document.querySelector('body');
 
-    const moveLeft = document.createElement("button")
-    const moveRight = document.createElement("button");
-
-    document.body.append(moveLeft, moveRight)
-
     // Need a queue to run BFS on the tree
     // Need a way to keep track of which levels we are on in order 
     const queue = []
