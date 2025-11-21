@@ -39,7 +39,6 @@ Keep in mind, my token has exceede its usage and I can't apply for new ones, so 
 
 `localhost:3000/input` prompts the user for the figma design id. This is then sent to the server where it orchestrates a figma api call. 
 
-`localhost:3000` is where you can find the figma design as is.
 
 ### Server
 
@@ -62,12 +61,12 @@ The Document node has children (only certain types have children such as FRAMES,
 
 The way BFS is used is through a queue where it pops the first node, creates a new div element of that node and processes it, then adds its children to the end of the queue. The reason why I needed the parent in each of the queue nodes is because the parent has properties important to the child such as positioning.
 
-![alt text](images/image-2.png)
+![alt text](images/image13.png)
 
 ### Processing 
 
 #### Types
-In the processing stage, the way this is done is by taking the data, and searching to see which type it is. Most of the Figma node types have their own properties, which means the need to have unique functions as well. 
+In the processing stage, the way this is done is by taking the data, and searching to see which type it is. Most of the Figma node types have their own [properties](https://developers.figma.com/docs/rest-api/file-node-types/), which means they need to have unique functions as well. 
 
 (all the type functions are located in public -> utils -> types)
 
@@ -77,7 +76,7 @@ In the processing stage, the way this is done is by taking the data, and searchi
 
 ![alt text](images/image-6.png)
 
-Take rectangle for example as shown above. This type inherits all the properties of a vector with 3 additional ones.
+Take the type [rectangle](https://developers.figma.com/docs/rest-api/file-node-types/#rectangle-props) as an examble above. This type inherits all the properties of a vector with 3 additional ones.
 
 In the function above, the function is looking for certain rectangle properties that it cares about in order to translate that over to css.
 
@@ -91,3 +90,8 @@ An example of a helper function is the applyPosition function which applies the 
 ![alt text](images/image-9.png)
 
 ## Limitations
+The way every design type works is they need to be placed on a CANVAS. This means that usually the first child of document is CANVAS with all of the CANVAS's children being the actual design. The problem is, my code is set so that there can only be 1 CANVAS. Reason why is because CANVAS type does not have size as its property. So instead my function makes it so that its size is the size of body. So if there are 2 CANVAS in a API call, it would get weird.
+
+Did not apply layouts. Reason why is because absolute positioning with flex direction gets very messy. I do have a branch called extension that is currently working on trying to apply both.
+
+There are [many properties in figma](https://developers.figma.com/docs/rest-api/file-node-types/). A lot of these are useless functions and others are definetly worth adding to make the project better.
