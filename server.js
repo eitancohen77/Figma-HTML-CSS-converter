@@ -1,5 +1,5 @@
 const express = require('express');
-const mockData= require('./mockData.json');
+//const mockData= require('./mockData.json');
 const path = require('path');
 require('dotenv').config();
 
@@ -13,8 +13,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', async(req, res) => {
     try {
-        //const resposne = await fetch('http://localhost:3000/getFigma');
-        //const mockData = await resposne.json();
+        const resposne = await fetch('http://localhost:3000/getFigma');
+        const mockData = await resposne.json();
 
         res.render ('index', { mockData})
     } catch(err) {

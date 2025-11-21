@@ -27,6 +27,9 @@ Create a .env file in the root of the project and add the variable with its toke
 ### 3. Run the Server
 In your terminal, run:
 
+### SideNote
+If you dont have a usable token set up, 
+
 `node server.js`
 
 This will run on localhost:3000. Over here you can see the output file.
