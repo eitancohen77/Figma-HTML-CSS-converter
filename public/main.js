@@ -57,7 +57,7 @@ if (!data || !data.document) {
         mySet.add(item.type)
         if (item.type == "CANVAS") {
             canvas(query, item)
-        } else if (item.type == "FRAME" || item.type == "GROUP") {
+        } else if (item.type == "FRAME" || item.type == "GROUP" || item.type == "COMPONENT" || item.type == "INSTANCE") {
             frame(query, item, parent);
         } else if (item.type == "VECTOR" || item.type == "STAR" || item.type == "LINE") {
             vector(query, item, parent)

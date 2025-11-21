@@ -100,3 +100,13 @@ The way every design type works is they need to be placed on a CANVAS. This mean
 Did not apply layouts. Reason why is because absolute positioning with flex direction gets very messy. I do have a branch called extension that is currently working on trying to apply both.
 
 There are [many properties in figma](https://developers.figma.com/docs/rest-api/file-node-types/). A lot of these are useless functions and others are definetly worth adding to make the project better.
+
+Right now the project works only with absolute positioning. So if a figma file returns negative positioning it would be out of bounds. Example such as:
+
+`"absoluteBoundingBox": {
+    "x": -667.0,
+    "y": -2382.0,
+    "width": 730.0,
+    "height": 760.0
+},`
+
