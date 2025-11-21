@@ -4,6 +4,7 @@ import { canvas } from "./utils/types/canvas.js";
 import { rectangle } from "./utils/types/rectangle.js";
 import { vector } from "./utils/types/vector.js";
 import { section } from "./utils/types/section.js";
+import { addPanControls } from "./utils/helper/movementButtons.js";
 
 const data = window.mockData;
 
@@ -15,7 +16,14 @@ let mySet = new Set();
 if (!data || !data.document) {
     console.error("Figma file error", data)
 } else {
+
+    const root = data.document
     const parent = document.querySelector('body');
+
+    const moveLeft = document.createElement("button")
+    const moveRight = document.createElement("button");
+
+    document.body.append(moveLeft, moveRight)
 
     // Need a queue to run BFS on the tree
     // Need a way to keep track of which levels we are on in order 
@@ -23,12 +31,15 @@ if (!data || !data.document) {
 
     // You are going to need to create a createCanvas function
     const rootDiv = document.createElement('div');
-    const rootId = idToClassName(data.document.id);
+    const rootId = idToClassName(root.id);
     rootDiv.classList.add(rootId);
     parent.append(rootDiv);
 
-    queue.push({ node: data.document, parent: null });
+    queue.push({ node: root, parent: null });
 
+
+    // Move picture:
+    addPanControls(rootDiv)
 
     function idToClassName(id) {
         return "id" + id.replace(/[^a-zA-Z0-9_-]/g, "-");
