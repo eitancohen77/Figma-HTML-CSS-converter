@@ -35,10 +35,9 @@ This will run on localhost:3000. Over here you can see the output file.
 
 ![alt text](images/image.png)
 
-Keep in mind, my token has exceede its usage and I can't apply for new ones, so as regards to the server asking the user for the id, it's all done based on theory alone and I wasn't able to test, though I am confident it should still work. Because of this I also used fake mockData in order to mimic how an identical API call would send back data.
-
 `localhost:3000/input` prompts the user for the figma design id. This is then sent to the server where it orchestrates a figma api call. 
 
+Keep in mind, my token has exceeded its usage and I can't apply for new ones, so in regards to the server asking the user for the id, it's all done based on theory alone and I wasn't able to test it, though I am confident it would work. Because of this I also used fake mockData in order to mimic how an identical API call would send back data.
 
 ### Server
 

@@ -28,7 +28,6 @@ app.get('/input', (req, res) => {
 })
 
 app.get('/getFigma:id', async(req, res) => {
-    //The actual method:
     const fileId = req.params.id;
     const url = `https://api.figma.com/v1/files/${fileId}`;
     try {
