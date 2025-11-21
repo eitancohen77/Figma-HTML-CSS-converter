@@ -8,7 +8,7 @@ const data = window.mockData;
 console.log(data)
 
 if (!data || !data.document) {
-    throw error("Figma file error")
+    throw new Error("Figma file error")
 }
 
 const parent = document.querySelector('body');

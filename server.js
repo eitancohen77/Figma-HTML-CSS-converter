@@ -13,7 +13,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', async(req, res) => {
     try {
-        const resposne = await fetch('http://localhost:3000/getFigma');
+        // The default figma design:
+        const resposne = await fetch('http://localhost:3000/getFigma/Hh3OjDglRPLNSzivcNWD0a');
         mockData = await resposne.json();
 
         res.render ('index', { mockData})
@@ -32,27 +33,29 @@ app.get('/input', (req, res) => {
     res.render('input')
 })
 
-app.get('/getFigma:id', async(req, res) => {
+app.get('/getFigma/:id', async (req, res) => {
     const fileId = req.params.id;
     const url = `https://api.figma.com/v1/files/${fileId}`;
+
     try {
         const response = await fetch(url, {
             headers: {
                 'X-Figma-Token': TOKEN_KEY
             }
-        })
+        });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! ${response.status}`)
-        }
+        const data = await response.json();   
 
-        const data = await response.json()
-        res.json(data);
-    } catch(err) {
-        console.error(err.message);
+        console.log('Figma status:', response.status);
+        console.log('Figma body:', data);
+
+        res.status(response.status).json(data);
+    } catch (err) {
+        console.error('Server error:', err.message);
         res.status(500).json({ error: 'Failed to fetch Figma file' });
     }
-})
+});
+
 
 app.post('/loadFigma', async (req, res) => {
     const figmaId = req.body.figmaId;
@@ -63,7 +66,7 @@ app.post('/loadFigma', async (req, res) => {
 
         res.render('index', { mockData: figmaData });
     } catch (err) {
-        console.error(err.message);
+        console.log(err.message);
         res.status(500).send("Failed to load Figma data");
     }
 });
