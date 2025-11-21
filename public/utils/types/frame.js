@@ -3,7 +3,8 @@ import { applyStrokes } from "../helper/strokes.js";
 import { applyFills } from "../helper/fills.js";
 import { applyPaint } from "../helper/paint.js";
 
-export function frame(query, parentBox, item) {
+export function frame(query, item, parent) {
+    const parentBox = parent != null ? parent.absoluteBoundingBox : null;
     
     if (item.fills && item.fills.length > 0) {
         //applyFills(query, item.fills, "background");

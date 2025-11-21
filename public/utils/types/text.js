@@ -2,8 +2,9 @@ import { applyPosition } from "../helper/position.js";
 import { applyFont } from "../helper/font.js";
 import { applyPaint } from "../helper/paint.js";
 
-export function text(query, item, parentBox) {
-    
+export function text(query, item, parent) {
+    const parentBox = parent != null ? parent.absoluteBoundingBox : null;
+
     if (item.style) {
         applyFont(query, item)
     }

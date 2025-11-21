@@ -39,7 +39,6 @@ if (!data || !data.document) {
 
         // Pop the queue.
         const { node: item, parent } = queue.shift();
-        const parentBox = parent != null ? parent.absoluteBoundingBox : null;
 
         // Getting the id in order to tag each property/componenet types.
         const id = item.id;
@@ -54,13 +53,13 @@ if (!data || !data.document) {
         } else if (item.type == "CANVAS") {
             canvas(query, item)
         } else if (item.type == "FRAME" || item.type == "GROUP") {
-            frame(query, parentBox, item);
+            frame(query, item, parent);
         } else if (item.type == "VECTOR") {
             vector(query, item, parent)
         } else if (item.type == "RECTANGLE") {
             rectangle(query, item, parent)
         } else if (item.type == "TEXT") {
-            text(query, item, parentBox)
+            text(query, item, parent)
         }
 
         // Deal with children
