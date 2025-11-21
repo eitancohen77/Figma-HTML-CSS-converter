@@ -8,9 +8,7 @@ export function frame(query, parentBox, item) {
     if (item.fills && item.fills.length > 0) {
         //applyFills(query, item.fills, "background");
         applyPaint(query, item.fills[0], "background")
-    } 
-
-    else if (item.backgroundColor != null) {
+    } else if (item.backgroundColor != null) {
         const { r, g, b, a } = item.backgroundColor;
         const rgb = `rgba(${r*255}, ${g*255}, ${b*255}, ${a})`;
         query.style.backgroundColor = rgb

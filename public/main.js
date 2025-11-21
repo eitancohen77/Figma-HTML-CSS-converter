@@ -48,23 +48,18 @@ if (!data || !data.document) {
         const query = document.querySelector(stringId);
 
         if (!query) {
-            console.warn('No element found for', stringId);
+            console.log('No element found for', stringId);
             continue;
-        }
 
-        if (item.type == "CANVAS") {
+        } else if (item.type == "CANVAS") {
             canvas(query, item)
-        }
-
-        if (item.type == "FRAME" || item.type == "GROUP") {
+        } else if (item.type == "FRAME" || item.type == "GROUP") {
             frame(query, parentBox, item);
-        }
-
-        else if (item.type == "RECTANGLE") {
-            rectangle(query, item, parentBox)
-        }
-
-        else if (item.type == "TEXT") {
+        } else if (item.type == "VECTOR") {
+            vector(query, item, parent)
+        } else if (item.type == "RECTANGLE") {
+            rectangle(query, item, parent)
+        } else if (item.type == "TEXT") {
             text(query, item, parentBox)
         }
 
