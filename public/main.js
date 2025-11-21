@@ -7,6 +7,9 @@ import { section } from "./utils/types/section.js";
 
 const data = window.mockData;
 
+let mySet = new Set();
+
+
 // Checks to see if the returned data is null or not. If not
 // logs error and doesnt proceed.
 if (!data || !data.document) {
@@ -43,14 +46,16 @@ if (!data || !data.document) {
         // Getting the id in order to tag each property/componenet types.
         const id = item.id;
         const stringId = idToSelector(id)
-        console.log(stringId)
         const query = document.querySelector(stringId);
 
         if (!query) {
             console.log('No element found for', stringId);
             continue;
 
-        } else if (item.type == "CANVAS") {
+        }
+        
+        mySet.add(item.type)
+        if (item.type == "CANVAS") {
             canvas(query, item)
         } else if (item.type == "FRAME" || item.type == "GROUP") {
             frame(query, item, parent);
@@ -75,4 +80,6 @@ if (!data || !data.document) {
             queue.push({ node: child, parent: item });
         }
     }
+
+    console.log(mySet)
 }
