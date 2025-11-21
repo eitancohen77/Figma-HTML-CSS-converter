@@ -32,7 +32,7 @@ function idToClassName(id) {
 }
 
 function idToSelector(id) {
-    return '.' + idToClassName(id);  // with dot
+    return '.' + idToClassName(id);
 }
 
 while (queue.length > 0) {
