@@ -15,7 +15,7 @@ export function section(query, item, parent) {
 
     if (item.absoluteBoundingBox !== null) {
         let localBox;
-        if (parentBox) { // edge case to catch the root
+        if (parentBox) { // Checks to see if the parent has a position
             localBox = {
                 x: item.absoluteBoundingBox.x - parentBox.x,
                 y: item.absoluteBoundingBox.y - parentBox.y,

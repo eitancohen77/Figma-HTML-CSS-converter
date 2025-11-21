@@ -10,7 +10,6 @@ const data = window.mockData;
 
 let mySet = new Set();
 
-
 // Checks to see if the returned data is null or not. If not
 // logs error and doesnt proceed.
 if (!data || !data.document) {
@@ -31,21 +30,18 @@ if (!data || !data.document) {
     parent.append(rootDiv);
 
     queue.push({ node: root, parent: null });
-
-
+    
     // Move picture:
     addPanControls(rootDiv)
 
     function idToClassName(id) {
         return "id" + id.replace(/[^a-zA-Z0-9_-]/g, "-");
     }
-
     function idToSelector(id) {
         return '.' + idToClassName(id);
     }
 
     while (queue.length > 0) {
-
         // Pop the queue.
         const { node: item, parent } = queue.shift();
 
@@ -57,7 +53,6 @@ if (!data || !data.document) {
         if (!query) {
             console.log('No element found for', stringId);
             continue;
-
         }
         
         mySet.add(item.type)
@@ -86,6 +81,5 @@ if (!data || !data.document) {
             queue.push({ node: child, parent: item });
         }
     }
-
     console.log(mySet)
 }

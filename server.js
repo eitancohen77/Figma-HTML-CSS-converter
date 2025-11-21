@@ -1,5 +1,5 @@
 const express = require('express');
-let mockData= require('./mockData.json');
+let mockData = require('./realData2.json');
 const path = require('path');
 require('dotenv').config();
 
