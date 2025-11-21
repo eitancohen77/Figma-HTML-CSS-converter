@@ -5,77 +5,78 @@ import { rectangle } from "./utils/types/rectangle.js";
 
 
 const data = window.mockData;
-console.log(data)
 
+// Checks to see if the returned data is null or not. If not
+// logs error and doesnt proceed.
 if (!data || !data.document) {
-    throw new Error("Figma file error")
-}
+    console.error("Figma file error", data)
+} else {
+    const parent = document.querySelector('body');
 
-const parent = document.querySelector('body');
+    // Need a queue to run BFS on the tree
+    // Need a way to keep track of which levels we are on in order 
+    const queue = []
 
-// Need a queue to run BFS on the tree
-// Need a way to keep track of which levels we are on in order 
-const queue = []
+    // You are going to need to create a createCanvas function
+    const rootDiv = document.createElement('div');
+    const rootId = idToClassName(data.document.id);
+    rootDiv.classList.add(rootId);
+    parent.append(rootDiv);
 
-// You are going to need to create a createCanvas function
-const rootDiv = document.createElement('div');
-const rootId = idToClassName(data.document.id);
-rootDiv.classList.add(rootId);
-parent.append(rootDiv);
-
-queue.push({ node: data.document, parent: null });
+    queue.push({ node: data.document, parent: null });
 
 
-function idToClassName(id) {
-    const [a, b] = id.split(':');
-    return `id${a}-${b}`;
-}
-
-function idToSelector(id) {
-    return '.' + idToClassName(id);
-}
-
-while (queue.length > 0) {
-
-    // Pop the queue.
-    const { node: item, parent } = queue.shift();
-    const parentBox = parent != null ? parent.absoluteBoundingBox : null;
-
-    // Getting the id in order to tag each property/componenet types.
-    const id = item.id;
-    const stringId = idToSelector(id)
-    console.log(stringId)
-    const query = document.querySelector(stringId);
-
-    if (!query) {
-        console.warn('No element found for', stringId);
-        continue;
+    function idToClassName(id) {
+        const [a, b] = id.split(':');
+        return `id${a}-${b}`;
     }
 
-    if (item.type == "CANVAS") {
-        canvas(query, item)
+    function idToSelector(id) {
+        return '.' + idToClassName(id);
     }
 
-    if (item.type == "FRAME" || item.type == "GROUP") {
-        frame(query, parentBox, item);
-    }
+    while (queue.length > 0) {
 
-    else if (item.type == "RECTANGLE") {
-        rectangle(query, item, parentBox)
-    }
+        // Pop the queue.
+        const { node: item, parent } = queue.shift();
+        const parentBox = parent != null ? parent.absoluteBoundingBox : null;
 
-    else if (item.type == "TEXT") {
-        text(query, item, parentBox)
-    }
+        // Getting the id in order to tag each property/componenet types.
+        const id = item.id;
+        const stringId = idToSelector(id)
+        console.log(stringId)
+        const query = document.querySelector(stringId);
 
-    // Deal with children
-    const children = item.children || [];
-    for (const child of children) {
-        const childDiv = document.createElement('div')
-        const childId =  idToClassName(child.id)
-        childDiv.classList.add(childId);
+        if (!query) {
+            console.warn('No element found for', stringId);
+            continue;
+        }
 
-        query.appendChild(childDiv)
-        queue.push({ node: child, parent: item });
+        if (item.type == "CANVAS") {
+            canvas(query, item)
+        }
+
+        if (item.type == "FRAME" || item.type == "GROUP") {
+            frame(query, parentBox, item);
+        }
+
+        else if (item.type == "RECTANGLE") {
+            rectangle(query, item, parentBox)
+        }
+
+        else if (item.type == "TEXT") {
+            text(query, item, parentBox)
+        }
+
+        // Deal with children
+        const children = item.children || [];
+        for (const child of children) {
+            const childDiv = document.createElement('div')
+            const childId =  idToClassName(child.id)
+            childDiv.classList.add(childId);
+
+            query.appendChild(childDiv)
+            queue.push({ node: child, parent: item });
+        }
     }
 }

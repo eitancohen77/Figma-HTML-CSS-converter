@@ -45,10 +45,7 @@ app.get('/getFigma/:id', async (req, res) => {
         });
 
         const data = await response.json();   
-
-        console.log('Figma status:', response.status);
         console.log('Figma body:', data);
-
         res.status(response.status).json(data);
     } catch (err) {
         console.error('Server error:', err.message);
