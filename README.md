@@ -86,7 +86,7 @@ Take the type [rectangle](https://developers.figma.com/docs/rest-api/file-node-t
 In the function above, the function is looking for certain rectangle properties that it cares about in order to translate that over to css.
 
 #### Helper Functions
-Some properties are also very complex, so to make things less confusing, more dynamic, and easier to debug I created helper functions that can with the processing
+Some properties are also very complex, so to make things less confusing, more dynamic, and easier to debug I created helper functions that can help with the processing
 
 ![alt text](images/image-8.png)
 
@@ -95,7 +95,6 @@ An example of a helper function is the applyPosition function which applies the 
 ![alt text](images/image-9.png)
 
 ## Limitations
-The way every design type works is they need to be placed on a CANVAS. This means that usually the first child of document is CANVAS with all of the CANVAS's children being the actual design. The problem is, my code is set so that there can only be 1 CANVAS. Reason why is because CANVAS type does not have size as its property. So instead my function makes it so that its size is the size of body. So if there are 2 CANVAS in a API call, it would get weird.
 
 Did not apply layouts. Reason why is because absolute positioning with flex direction gets very messy. I do have a branch called extension that is currently working on trying to apply both.
 
